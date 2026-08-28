@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>אקדמיית ILLUSTRATOR של האחוואנים — מעבדת Pathfinder</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts - Assistant & Heebo -->
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Heebo:wght@400;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Assistant', 'Heebo', sans-serif;
+      background-color: #FAF7F0;
+    }
+    .cream-bg { background-color: #FAF7F0; }
+    .card-shadow { box-shadow: 0 4px 20px -2px rgba(139, 92, 26, 0.08); }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+
+    @keyframes tuvia-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.55); }
+      50% { box-shadow: 0 0 0 14px rgba(234, 88, 12, 0); }
+    }
+    .tuvia-fab {
+      animation: tuvia-glow 2.2s infinite;
+    }
+
+    /* אנימציית סיבוב לאוואטר המנטור המטורלל */
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .avatar-spin {
+      animation: spin-slow 8s linear infinite;
+    }
+  </style>
+</head>
+<body class="cream-bg text-stone-800 min-h-screen pb-12 transition-all duration-300">
+
+  <!-- 🌟 חלונית צפה מטורללת 🌟 -->
+  <a href="https://gemini.google.com/gem/182jqjh6fxGeiMJ3R2si6dovgXIugR93N?usp=sharing" target="_blank" rel="noopener"
+     class="tuvia-fab fixed bottom-6 left-6 z-50 block w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden shadow-2xl transition duration-300 transform hover:scale-105 border-4 border-white bg-white">
+    <img src="https://lh3.googleusercontent.com/d/1BHxytxfATgrv3wpk_8slqpRX08p2Dzml" alt="טוביה הבוט" class="w-full h-full object-cover block">
+  </a>
+
+  <!-- באנר עליון -->
+  <header class="bg-white border-b border-orange-100 shadow-xs sticky top-0 z-40 backdrop-blur-md bg-white/90">
+    <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      
+      <!-- לוגו וכותרת -->
+      <div class="flex items-center gap-4">
+        <div class="bg-orange-600 text-white p-3 rounded-2xl shadow-md rotate-[-2deg] font-black text-xl tracking-wider shrink-0">
+          אקדמיית ILLUSTRATOR
+        </div>
+        <div>
+          <h1 class="text-xl sm:text-2xl font-black text-stone-900 leading-tight flex items-center gap-3">
+            מעבדת Pathfinder — תרגול פעולות בוליאניות
+          </h1>
+          <p class="text-xs sm:text-sm text-stone-500 font-medium">י7 תקשוב - לומדים, שמכפלים, ומבינים חיתוכי צורות כמו מקצוענים</p>
+        </div>
+      </div>
+
+      <!-- תמונת Pathfinder בולטת בכותרת -->
+      <div class="flex items-center gap-3 bg-orange-50 px-4 py-2 rounded-2xl border border-orange-200 shadow-sm">
+        <img src="https://lh3.googleusercontent.com/d/1sSIxrkcxvCM7jqNfFoys580qpX_Sda9A" alt="Pathfinder Tool Logo" class="h-12 md:h-14 object-contain rounded-lg">
+        <div class="text-right hidden sm:block">
+          <span class="block text-xs font-bold text-orange-600">כלי Pathfinder</span>
+          <span class="block text-[11px] font-extrabold text-stone-600">Shape Modes</span>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    
+    <!-- תיבת מוטיבציה שבועית מהמנטור -->
+    <section class="bg-orange-50/50 border border-orange-100 rounded-3xl p-6 mb-8 flex flex-col md:flex-row justify-between items-center gap-4 card-shadow relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-24 h-24 bg-orange-200/20 rounded-full blur-2xl"></div>
+      <div class="flex items-center gap-4 relative z-10">
+        <!-- אוואטר מסתובב מטורלל -->
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-orange-500 shadow-md flex-shrink-0 bg-white">
+          <img src="https://lh3.googleusercontent.com/d/1eVsO38Du8cndWqpQdZWL8w_nyQcTk1DR" alt="מנטור מטורלל" class="w-full h-full object-cover avatar-spin">
+        </div>
+        <div>
+          <h4 class="text-orange-800 font-black text-lg">פינת המנטור המטורלל:</h4>
+          <p id="motivation-box" class="text-stone-700 font-bold text-md transition-all duration-300">ארבע פעולות בוליאניות, ארבע צורות יסוד — תפעיל את המוח הוקטורי, תבחר את הפעולה הנכונה ותראה את הקסם קורה בזמן אמת!</p>
+        </div>
+      </div>
+      <button 
+        onclick="triggerRandomMotivation()"
+        class="bg-orange-600 hover:bg-orange-700 active:scale-95 text-white font-black px-6 py-3 rounded-2xl shadow-md hover:shadow-lg transition-all text-sm whitespace-nowrap shrink-0"
+      >
+        תדלק אותי במוטיבציה! ⚡
+      </button>
+    </section>
+
+    <!-- תיאור כללי וסמלים -->
+    <section class="bg-white border border-stone-200/80 rounded-3xl p-6 sm:p-8 mb-8 card-shadow">
+      <h2 class="text-xl font-extrabold text-stone-900 mb-2">אז איך המעבדה עובדת, אחוואן? 🔺⬤⬛</h2>
+      <p class="text-stone-600 font-bold leading-relaxed mb-6">
+        בכל תרגיל תראו תוצאה יעדית ותצטרכו לבחור את הפעולה הנכונה כדי להגיע אליה. התוצאה מחושבת בזמן אמת, בדיוק כמו בתוכנת עיצוב וקטורי אמיתית!
+      </p>
+
+      <div class="flex flex-wrap gap-3 font-mono-code text-xs">
+        <span class="bg-orange-100/70 border border-orange-200 text-orange-900 font-extrabold px-3 py-2 rounded-xl">איחוד — A ∪ B</span>
+        <span class="bg-orange-100/70 border border-orange-200 text-orange-900 font-extrabold px-3 py-2 rounded-xl">חיתוך — A ∩ B</span>
+        <span class="bg-orange-100/70 border border-orange-200 text-orange-900 font-extrabold px-3 py-2 rounded-xl">חיסור קדמי — A − B</span>
+        <span class="bg-orange-100/70 border border-orange-200 text-orange-900 font-extrabold px-3 py-2 rounded-xl">החרגה — A ⊕ B</span>
+      </div>
+    </section>
+
+    <!-- סרגל התקדמות -->
+    <div class="flex gap-2 mb-8" id="progressRow"></div>
+
+    <!-- DEMO -->
+    <section id="demoSection" class="bg-white border border-stone-200/80 rounded-3xl p-6 sm:p-8 mb-8 card-shadow">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-6 border-b border-stone-100 pb-4">
+        <h2 class="text-2xl font-black text-stone-900">קודם — הדגמה</h2>
+        <span class="bg-orange-50 text-orange-700 text-xs font-extrabold px-3 py-1 rounded-full border border-orange-100">לפני שמתרגלים, מבינים מה כל פעולה עושה</span>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+        <div class="md:col-span-5 bg-stone-100/80 border border-stone-200/80 rounded-2xl p-4 flex justify-center items-center">
+          <canvas id="demoCanvas" width="220" height="180" class="rounded-xl shadow-xs bg-[#fffaf0]"></canvas>
+        </div>
+        
+        <div class="md:col-span-7 flex flex-col justify-between h-full">
+          <div>
+            <div class="inline-block font-mono-code text-sm font-black bg-stone-900 text-amber-300 px-3 py-1 rounded-lg mb-2" id="demoExpr">A ∪ B</div>
+            <h3 class="text-2xl font-extrabold text-stone-900 mb-2" id="demoName">איחוד (Unite)</h3>
+            <p class="text-stone-600 font-bold text-base leading-relaxed mb-6" id="demoDesc"></p>
+          </div>
+          
+          <div class="flex flex-wrap gap-3">
+            <button class="bg-stone-100 hover:bg-stone-200 border border-stone-300 text-stone-800 font-black px-4 py-2.5 rounded-xl text-sm transition-all active:scale-95" id="demoPrev">◀ הקודם</button>
+            <button class="bg-stone-100 hover:bg-stone-200 border border-stone-300 text-stone-800 font-black px-4 py-2.5 rounded-xl text-sm transition-all active:scale-95" id="demoNext">הבא ▶</button>
+            <button class="bg-orange-600 hover:bg-orange-700 text-white font-black px-6 py-2.5 rounded-xl text-sm transition-all shadow-md active:scale-95 mr-auto" id="startBtn">להתחיל לתרגל ↓</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEVELS render here -->
+    <div id="levelsHost" class="space-y-8"></div>
+
+    <!-- פוטר -->
+    <footer class="text-center mt-12 pt-6 border-t border-stone-200 text-xs text-stone-500 font-medium">
+      <p>© 2026 אקדמיית אילוסטרייטור של האחוואנים. מעבדת Pathfinder · תרגול פנימי · בהצלחה 🔺⬤⬛</p>
+    </footer>
+
+  </main>
+
+  <script>
+    const encouragingQuotes = [
+      "פשששש יא תותח וקטורים! איזה חיתוך מדויק!",
+      "אחוואן, ההבנה שלך ב-Pathfinder חדשנית ברמות!",
+      "כל פעולה בוליאנית שאתה בוחר היא פגיעה בבול!",
+      "אילוסטרייטור מוחאת לך כפיים! תותח על!",
+      "איזה דיוק בסדר השכבות! אמן וקטורים אמיתי!",
+      "התלמיד עלה על רבו! מעבדת Pathfinder קטנה עליך!"
+    ];
+
+    function triggerRandomMotivation() {
+      const randomQuote = encouragingQuotes[Math.floor(Math.random() * encouragingQuotes.length)];
+      document.getElementById('motivation-box').innerText = randomQuote;
+    }
+
+    /* ---------- shape + boolean engine ---------- */
+    function drawShape(ctx, s, color){
+      ctx.beginPath();
+      switch(s.type){
+        case 'rect':
+          ctx.rect(s.cx - s.w/2, s.cy - s.h/2, s.w, s.h); break;
+        case 'circle':
+          ctx.arc(s.cx, s.cy, s.r, 0, Math.PI*2); break;
+        case 'ellipse':
+          ctx.ellipse(s.cx, s.cy, s.rx, s.ry, 0, 0, Math.PI*2); break;
+        case 'triangle':
+          ctx.moveTo(s.cx, s.cy - s.h/2);
+          ctx.lineTo(s.cx + s.w/2, s.cy + s.h/2);
+          ctx.lineTo(s.cx - s.w/2, s.cy + s.h/2);
+          ctx.closePath(); break;
+      }
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+
+    const COMPOSITE = {
+      unite: 'source-over',
+      intersect: 'source-in',
+      minusFront: 'destination-out',
+      exclude: 'xor'
+    };
+
+    function renderOp(canvas, back, front, op, color){
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0,0,canvas.width, canvas.height);
+      ctx.globalCompositeOperation = 'source-over';
+      drawShape(ctx, back, color);
+      ctx.globalCompositeOperation = COMPOSITE[op];
+      drawShape(ctx, front, color);
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    function renderOutline(canvas, back, front){
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0,0,canvas.width, canvas.height);
+      ctx.globalAlpha = 0.55;
+      drawShape(ctx, back, '#ea580c');
+      ctx.globalAlpha = 0.45;
+      drawShape(ctx, front, '#1c1917');
+      ctx.globalAlpha = 1;
+    }
+
+    /* ---------- demo data ---------- */
+    const OP_META = {
+      unite:      {name:'איחוד (Unite)', expr:'A ∪ B', desc:'שתי הצורות מתמזגות לצורה אחת רציפה, כל השטח שמכוסה על ידי A או B נשמר.'},
+      intersect:  {name:'חיתוך (Intersect)', expr:'A ∩ B', desc:'נשאר רק האזור המשותף — החלק שבו שתי הצורות חופפות. כל השאר נמחק.'},
+      minusFront: {name:'חיסור קדמי (Minus Front)', expr:'A − B', desc:'הצורה הקדמית (B) "חותכת חור" בצורה האחורית (A) ונעלמת בעצמה. סדר השכבות קובע את התוצאה!'},
+      exclude:    {name:'החרגה (Exclude)', expr:'A ⊕ B', desc:'ההפך מחיתוך: האזור המשותף דווקא נמחק, ונשארים רק החלקים שאינם חופפים.'}
+    };
+    const demoBack  = {type:'circle', cx:95, cy:90, r:52};
+    const demoFront = {type:'rect', cx:135, cy:100, w:80, h:80};
+    const demoOrder = ['unite','intersect','minusFront','exclude'];
+    let demoIdx = 0;
+
+    function paintDemo(){
+      const op = demoOrder[demoIdx];
+      const meta = OP_META[op];
+      document.getElementById('demoExpr').textContent = meta.expr;
+      document.getElementById('demoName').textContent = meta.name;
+      document.getElementById('demoDesc').textContent = meta.desc;
+      renderOp(document.getElementById('demoCanvas'), demoBack, demoFront, op, '#ea580c');
+    }
+    document.getElementById('demoPrev').onclick = ()=>{ demoIdx = (demoIdx+3)%4; paintDemo(); };
+    document.getElementById('demoNext').onclick = ()=>{ demoIdx = (demoIdx+1)%4; paintDemo(); };
+    paintDemo();
+
+    /* ---------- level data ---------- */
+    const LEVELS = [
+      {
+        title: 'שלב 1 · עיגול ומלבן',
+        sub: 'בחרו את הפעולה שיוצרת את צורת היעד.',
+        back:  {type:'circle', cx:75, cy:90, r:48},
+        front: {type:'rect', cx:120, cy:100, w:70, h:70},
+        correctOp: 'unite',
+        minusOrderMatters: false,
+        hint: 'שימו לב שאין "חורים" בתוצאה, ושום חלק לא נעלם — כל השטח של שתי הצורות נשמר.'
+      },
+      {
+        title: 'שלב 2 · משולש ועיגול',
+        sub: 'הפעם היעד קטן בהרבה מהצורות המקוריות.',
+        back:  {type:'triangle', cx:90, cy:95, w:110, h:100},
+        front: {type:'circle', cx:130, cy:95, r:55},
+        correctOp: 'intersect',
+        minusOrderMatters: false,
+        hint: 'התוצאה נמצאת רק במקום שבו שתי הצורות חופפות זו את זו — שום דבר מחוץ לחפיפה לא נשאר.'
+      },
+      {
+        title: 'שלב 3 · מלבן ואליפסה — סדר שכבות',
+        sub: 'כאן, לסדר השכבות (מי קדמי ומי אחורי) יש חשיבות!',
+        back:  {type:'rect', cx:100, cy:95, w:110, h:75},
+        front: {type:'ellipse', cx:145, cy:95, rx:45, ry:55},
+        correctOp: 'minusFront',
+        minusOrderMatters: true,
+        correctSwap: false,
+        hint: 'הצורה הקדמית "נחתכת" מהצורה האחורית ונעלמת. נסו לבדוק: איזו צורה נשארת שלמה בחלקה, ואיזו משמשת רק כ"מספריים"?'
+      },
+      {
+        title: 'שלב 4 · עיגול ומשולש',
+        sub: 'זו הפעולה שבה דווקא האזור המשותף נעלם.',
+        back:  {type:'circle', cx:95, cy:95, r:55},
+        front: {type:'triangle', cx:140, cy:100, w:100, h:95},
+        correctOp: 'exclude',
+        minusOrderMatters: false,
+        hint: 'התוצאה כוללת שני חלקים נפרדים שלא נוגעים זה בזה — בדיוק המקומות שבהם הצורות *לא* חופפות.'
+      },
+      {
+        title: 'שלב 5 · אליפסה ומלבן — היפוך סדר',
+        sub: 'שימו לב היטב לסדר השכבות הפעם — הוא הפוך מהרגיל.',
+        back:  {type:'ellipse', cx:100, cy:95, rx:55, ry:42},
+        front: {type:'rect', cx:150, cy:95, w:65, h:90},
+        correctOp: 'minusFront',
+        minusOrderMatters: true,
+        correctSwap: true,
+        hint: 'אם התוצאה לא מסתדרת — נסו להחליף מי מוגדר כקדמי ומי כאחורי בעזרת המתג "החלף סדר שכבות".'
+      },
+      {
+        title: 'שלב 6 · אתגר סיום',
+        sub: 'ללא רמזים באפיון החזותי — רק ההיגיון של הפעולות.',
+        back:  {type:'triangle', cx:95, cy:100, w:105, h:100},
+        front: {type:'ellipse', cx:140, cy:95, rx:48, ry:52},
+        correctOp: 'exclude',
+        minusOrderMatters: false,
+        hint: 'שאלו את עצמכם: האם החלק החופף נעלם, נשאר לבד, או שהכול מתמזג יחד?'
+      }
+    ];
+
+    const OPS_ORDER = ['unite','intersect','minusFront','exclude'];
+
+    /* ---------- render levels ---------- */
+    const host = document.getElementById('levelsHost');
+    const progressRow = document.getElementById('progressRow');
+    const levelState = LEVELS.map(()=>({solved:false, revealed:false, wrong:0}));
+
+    LEVELS.forEach((lvl, idx)=>{
+      const seg = document.createElement('div');
+      seg.className = 'progress-seg flex-1 h-2.5 rounded-full bg-stone-200 overflow-hidden border border-stone-300/60';
+      seg.innerHTML = '<div class="fill h-full w-0 transition-all duration-500 ease-out"></div>';
+      progressRow.appendChild(seg);
+
+      const sec = document.createElement('section');
+      sec.className = 'level hidden bg-white border border-stone-200/80 rounded-3xl p-6 sm:p-8 card-shadow';
+      sec.id = 'level-'+idx;
+      sec.innerHTML = `
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-6 border-b border-stone-100 pb-4">
+          <div>
+            <h3 class="text-2xl font-black text-stone-900 mb-1">${lvl.title}</h3>
+            <p class="text-stone-500 font-bold text-sm">${lvl.sub}</p>
+          </div>
+          <span class="font-mono-code text-xs font-bold bg-stone-100 text-stone-700 px-3 py-1.5 rounded-full border border-stone-200 shrink-0">תרגיל ${idx+1} מתוך ${LEVELS.length}</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div class="lg:col-span-7 flex flex-wrap gap-4 justify-center sm:justify-start">
+            <div class="bg-stone-50 border border-stone-200 rounded-2xl p-3 text-center">
+              <canvas class="c-shapes rounded-xl bg-[#fffaf0]" width="150" height="140"></canvas>
+              <p class="mt-2 font-mono-code text-[11px] font-bold text-stone-500">הצורות المקוריות</p>
+            </div>
+            <div class="bg-stone-50 border border-stone-200 rounded-2xl p-3 text-center">
+              <canvas class="c-target rounded-xl bg-[#fffaf0]" width="150" height="140"></canvas>
+              <p class="mt-2 font-mono-code text-[11px] font-bold text-stone-500">צורת היעד</p>
+            </div>
+            <div class="bg-stone-50 border border-orange-200 rounded-2xl p-3 text-center bg-orange-50/20">
+              <canvas class="c-result rounded-xl bg-[#fffaf0]" width="150" height="140"></canvas>
+              <p class="mt-2 font-mono-code text-[11px] font-extrabold text-orange-600">התוצאה שלכם</p>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 flex flex-col gap-4">
+            <div class="grid grid-cols-2 gap-2">
+              ${OPS_ORDER.map(op=>`
+                <button class="op-btn bg-stone-50 border-2 border-stone-200 hover:border-orange-400 rounded-2xl p-3 text-center transition-all font-bold text-sm text-stone-800" data-op="${op}">
+                  <span class="sym block font-mono-code text-base text-orange-600 font-black mb-0.5">${OP_META[op].expr}</span>
+                  ${OP_META[op].name.split(' (')[0]}
+                </button>`).join('')}
+            </div>
+
+            <label class="flex items-center gap-2 font-mono-code text-xs font-bold text-stone-600 bg-stone-100/70 border border-stone-200 rounded-xl p-3 cursor-pointer">
+              <input type="checkbox" class="swap-toggle accent-orange-600 w-4 h-4 rounded">
+              החלף סדר שכבות (מי קדמי ומי אחורי)
+            </label>
+
+            <div class="inspector font-mono-code bg-stone-900 text-stone-200 rounded-2xl p-4 text-xs leading-relaxed">
+              פעולה נבחרת: <span class="expr insp-expr text-orange-400 font-bold">—</span><br>
+              סדר שכבות: <span class="insp-order text-stone-300 font-bold">רגיל</span>
+            </div>
+
+            <div class="flex flex-wrap gap-2 pt-2">
+              <button class="check-btn bg-orange-600 hover:bg-orange-700 disabled:bg-stone-300 disabled:cursor-not-allowed text-white font-black px-6 py-3 rounded-xl transition-all text-sm shadow-md active:scale-95 flex-1" disabled>בדקו אותי</button>
+              <button class="reveal-btn bg-stone-800 hover:bg-stone-900 text-white font-black px-4 py-3 rounded-xl transition-all text-sm active:scale-95 hidden">הצג פתרון</button>
+              <button class="next-btn bg-orange-600 hover:bg-orange-700 text-white font-black px-6 py-3 rounded-xl transition-all text-sm shadow-md active:scale-95 hidden flex-1">לתרגיל הבא ▶</button>
+            </div>
+
+            <div class="feedback hidden font-bold text-sm rounded-xl p-4 leading-relaxed"></div>
+          </div>
+        </div>
+      `;
+      host.appendChild(sec);
+    });
+
+    function updateProgress(){
+      document.querySelectorAll('.progress-seg').forEach((seg, i)=>{
+        const fill = seg.querySelector('.fill');
+        if(levelState[i].solved){ 
+          fill.style.width='100%'; 
+          fill.style.backgroundColor='#16a34a'; 
+        }
+        else if(levelState[i].revealed){ 
+          fill.style.width='100%'; 
+          fill.style.backgroundColor='#d97706'; 
+        }
+        else { 
+          fill.style.width='0%'; 
+        }
+      });
+    }
+
+    function showLevel(idx){
+      document.querySelectorAll('.level').forEach(s=>s.classList.add('hidden'));
+      const target = document.getElementById('level-'+idx);
+      if(target){
+        target.classList.remove('hidden');
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    }
+
+    document.getElementById('startBtn').onclick = ()=> showLevel(0);
+
+    LEVELS.forEach((lvl, idx)=>{
+      const sec = document.getElementById('level-'+idx);
+      const cShapes = sec.querySelector('.c-shapes');
+      const cTarget = sec.querySelector('.c-target');
+      const cResult = sec.querySelector('.c-result');
+      const opBtns = [...sec.querySelectorAll('.op-btn')];
+      const swapToggle = sec.querySelector('.swap-toggle');
+      const checkBtn = sec.querySelector('.check-btn');
+      const revealBtn = sec.querySelector('.reveal-btn');
+      const nextBtn = sec.querySelector('.next-btn');
+      const feedback = sec.querySelector('.feedback');
+      const exprEl = sec.querySelector('.insp-expr');
+      const orderEl = sec.querySelector('.insp-order');
+
+      let selectedOp = null;
+
+      renderOutline(cShapes, lvl.back, lvl.front);
+      const targetBack = lvl.minusOrderMatters && lvl.correctSwap ? lvl.front : lvl.back;
+      const targetFront = lvl.minusOrderMatters && lvl.correctSwap ? lvl.back : lvl.front;
+      renderOp(cTarget, targetBack, targetFront, lvl.correctOp, '#292524');
+
+      function currentOrder(){
+        const swapped = swapToggle.checked;
+        return swapped ? {back:lvl.front, front:lvl.back} : {back:lvl.back, front:lvl.front};
+      }
+
+      function repaint(){
+        if(!selectedOp) return;
+        const {back, front} = currentOrder();
+        renderOp(cResult, back, front, selectedOp, '#ea580c');
+        exprEl.textContent = OP_META[selectedOp].expr;
+        orderEl.textContent = swapToggle.checked ? 'הפוך' : 'רגיל';
+      }
+
+      opBtns.forEach(btn=>{
+        btn.onclick = ()=>{
+          opBtns.forEach(b=>{
+            b.classList.remove('border-orange-500', 'bg-orange-50', 'text-orange-900');
+            b.classList.add('border-stone-200', 'bg-stone-50');
+          });
+          btn.classList.remove('border-stone-200', 'bg-stone-50');
+          btn.classList.add('border-orange-500', 'bg-orange-50', 'text-orange-900');
+          selectedOp = btn.dataset.op;
+          checkBtn.disabled = false;
+          repaint();
+        };
+      });
+      swapToggle.onchange = repaint;
+
+      function setFeedback(kind, text){
+        feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'border-emerald-300', 'bg-rose-100', 'text-rose-800', 'border-rose-300', 'bg-amber-100', 'text-amber-800', 'border-amber-300');
+        feedback.classList.add('border');
+
+        if (kind === 'ok') {
+          feedback.classList.add('bg-emerald-100', 'text-emerald-800', 'border-emerald-300');
+        } else if (kind === 'bad') {
+          feedback.classList.add('bg-rose-100', 'text-rose-800', 'border-rose-300');
+        } else if (kind === 'hint') {
+          feedback.classList.add('bg-amber-100', 'text-amber-800', 'border-amber-300');
+        }
+
+        feedback.textContent = text;
+      }
+
+      checkBtn.onclick = ()=>{
+        if(!selectedOp) return;
+        const swapped = swapToggle.checked;
+        const opOk = selectedOp === lvl.correctOp;
+        const orderOk = lvl.minusOrderMatters ? (swapped === !!lvl.correctSwap) : true;
+
+        if(opOk && orderOk){
+          levelState[idx].solved = true;
+          setFeedback('ok', '✔ בדיוק! זו הפעולה הנכונה, וגם סדר השכבות מתאים.');
+          nextBtn.classList.remove('hidden');
+          checkBtn.disabled = true;
+          opBtns.forEach(b=> b.disabled = true);
+          swapToggle.disabled = true;
+          updateProgress();
+        } else {
+          levelState[idx].wrong++;
+          let msg = '✘ לא בדיוק. ';
+          if(!opOk) msg += 'נסו פעולה אחרת. ';
+          if(opOk && !orderOk) msg += 'הפעולה נכונה — אבל בדקו את סדר השכבות. ';
+          if(levelState[idx].wrong >= 2){
+            setFeedback('hint', '💡 רמז: ' + lvl.hint);
+          } else {
+            setFeedback('bad', msg);
+          }
+          if(levelState[idx].wrong >= 3){
+            revealBtn.classList.remove('hidden');
+          }
+        }
+      };
+
+      revealBtn.onclick = ()=>{
+        levelState[idx].revealed = true;
+        const correctSwapVal = !!lvl.correctSwap;
+        swapToggle.checked = correctSwapVal;
+        opBtns.forEach(b=>{
+          if(b.dataset.op === lvl.correctOp) {
+            b.classList.add('border-orange-500', 'bg-orange-50', 'text-orange-900');
+          } else {
+            b.classList.remove('border-orange-500', 'bg-orange-50', 'text-orange-900');
+          }
+        });
+        selectedOp = lvl.correctOp;
+        repaint();
+        setFeedback('hint', `הפתרון: ${OP_META[lvl.correctOp].name} (${OP_META[lvl.correctOp].expr})` + (lvl.minusOrderMatters ? `, סדר שכבות: ${correctSwapVal ? 'הפוך' : 'רגיל'}.` : '.'));
+        checkBtn.disabled = true;
+        opBtns.forEach(b=> b.disabled = true);
+        swapToggle.disabled = true;
+        revealBtn.classList.add('hidden');
+        nextBtn.classList.remove('hidden');
+        updateProgress();
+      };
+
+      nextBtn.onclick = ()=>{
+        if(idx + 1 < LEVELS.length){
+          showLevel(idx+1);
+        } else {
+          sec.insertAdjacentHTML('beforeend', '<p class="mt-4 font-black text-emerald-600 text-lg text-center">🎉 סיימתם את כל התרגילים במעבדת ה-Pathfinder!</p>');
+          nextBtn.classList.add('hidden');
+        }
+      };
+    });
+
+    updateProgress();
+  </script>
+</body>
+</html>
