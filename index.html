@@ -67,18 +67,18 @@
         </div>
       </div>
 
-      <!-- 🚀 הוספת חלונית עמודה עם תמונת מוטיבציה מ-Drive ואפשרויות פתיחה/הגדלה/גלילה/סגירה משמאל לכפתור -->
+      <!-- 🚀 חלונית עמודה עם הסבר Pathfinder ותמונת הדרייב הניתנת להגדלה ולסגירה -->
       <div class="flex items-center gap-3">
-        <div id="motivationColumnModal" class="bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-200 p-3 rounded-2xl shadow-md flex items-center gap-3 relative max-w-xs transition-all">
-          <div class="cursor-pointer group relative shrink-0" onclick="openImageModal()">
-            <img src="https://lh3.googleusercontent.com/d/1XXlz6hA2sVhpCkd5UoVwAG5ttWmgv8F7" alt="מוטיבציה מהדרייב" class="w-12 h-12 object-cover rounded-xl border border-orange-300 shadow-sm group-hover:scale-105 transition-transform">
+        <div id="pathfinderInfoColumn" class="bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-200 p-3 rounded-2xl shadow-md flex items-center gap-3 relative max-w-xs transition-all">
+          <div class="cursor-pointer group relative shrink-0" onclick="openImageModal()" title="לחץ להגדלה">
+            <img src="https://lh3.googleusercontent.com/d/1XXlz6hA2sVhpCkd5UoVwAG5ttWmgv8F7" alt="תמונת Pathfinder הסבר" class="w-12 h-12 object-cover rounded-xl border border-orange-300 shadow-sm group-hover:scale-105 transition-transform">
             <span class="absolute -bottom-1 -right-1 bg-orange-600 text-white text-[9px] px-1 rounded-full font-bold">🔍</span>
           </div>
           <div class="text-right overflow-hidden">
-            <span class="block text-xs font-black text-orange-800">דלק מוטיבציה יומי! 🔥</span>
-            <span id="header-motivation-text" class="block text-[11px] font-bold text-stone-600 truncate">תפתח את הניצוץ הוקטורי בך!</span>
+            <span class="block text-xs font-black text-orange-800">הסבר Pathfinder 🔺</span>
+            <span class="block text-[11px] font-bold text-stone-600 truncate">חיתוך ואיחוד צורות חכם</span>
           </div>
-          <button onclick="closeMotivationColumn()" class="absolute -top-2 -left-2 bg-stone-200 hover:bg-stone-300 text-stone-700 w-5 h-5 rounded-full text-xs flex items-center justify-center font-bold shadow-xs">×</button>
+          <button onclick="closePathfinderColumn()" class="absolute -top-2 -left-2 bg-stone-200 hover:bg-stone-300 text-stone-700 w-5 h-5 rounded-full text-xs flex items-center justify-center font-bold shadow-xs">×</button>
         </div>
       </div>
 
@@ -106,15 +106,15 @@
     </div>
   </header>
 
-  <!-- מודל צפייה מוגדלת בתמונה עם גלילה -->
+  <!-- חלונית מוגדלת (Lightbox) לתמונה מהדרייב עם אפשרות גלילה וסגירה -->
   <div id="imageLightbox" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative shadow-2xl">
+    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 relative shadow-2xl">
       <button onclick="closeImageModal()" class="absolute top-4 left-4 bg-stone-100 hover:bg-stone-200 text-stone-800 w-10 h-10 rounded-full font-black text-lg flex items-center justify-center">✕</button>
-      <h3 class="text-2xl font-black text-stone-900 mb-4 text-right">מוטיבציה וקטורית במלוא הדרה! 🚀</h3>
-      <div class="overflow-auto max-h-[60vh] border border-stone-200 rounded-2xl p-2 bg-stone-50 flex justify-center">
-        <img src="https://lh3.googleusercontent.com/d/1XXlz6hA2sVhpCkd5UoVwAG5ttWmgv8F7" alt="תמונת מוטיבציה מוגדלת" class="max-w-full object-contain rounded-xl shadow-md">
+      <h3 class="text-2xl font-black text-stone-900 mb-4 text-right">הסבר Pathfinder המלא 📐</h3>
+      <div class="overflow-auto max-h-[65vh] border border-stone-200 rounded-2xl p-2 bg-stone-50 flex justify-center">
+        <img src="https://lh3.googleusercontent.com/d/1XXlz6hA2sVhpCkd5UoVwAG5ttWmgv8F7" alt="תמונת הסבר Pathfinder מוגדלת" class="max-w-full object-contain rounded-xl shadow-md">
       </div>
-      <p class="text-stone-600 font-bold text-center mt-4">אחוואן, זכור: כל פאת'פיינדר שאתה חותך מקרב אותך להיות אמן אילוסטרייטור מושלם!</p>
+      <p class="text-stone-600 font-bold text-center mt-4">אחוואן, כאן רואים בדיוק איך פעולות ה-Pathfinder משפיעות על הצורות שלך!</p>
     </div>
   </div>
 
@@ -515,15 +515,7 @@
   </div>
 
   <script>
-    /* ---------- פונקציות ניהול לחלונית מוטיבציה וגלריה למעלה ---------- */
-    const headerMotivations = [
-      "תפתח את הניצוץ הוקטורי בך!",
-      "כל עקומה מושלמת מתחילה בצעד אחד!",
-      "הדרך לאוסקר העיצוב עוברת ב-Pathfinder!",
-      "תפציץ עם חיתוכים מדויקים היום!",
-      "המוח שלך עובד כמו מעצב על!"
-    ];
-
+    /* ---------- פונקציות ניהול לחלונית Pathfinder וגלריית פתיחה/סגירה ---------- */
     function openImageModal() {
       document.getElementById('imageLightbox').classList.remove('hidden');
     }
@@ -532,8 +524,8 @@
       document.getElementById('imageLightbox').classList.add('hidden');
     }
 
-    function closeMotivationColumn() {
-      const col = document.getElementById('motivationColumnModal');
+    function closePathfinderColumn() {
+      const col = document.getElementById('pathfinderInfoColumn');
       col.style.opacity = '0';
       setTimeout(() => col.remove(), 300);
     }
@@ -588,10 +580,6 @@
     function triggerRandomMotivation() {
       const randomQuote = encouragingQuotes[Math.floor(Math.random() * encouragingQuotes.length)];
       document.getElementById('motivation-box').innerText = randomQuote;
-
-      // רענון משפט קטן גם בחלונית העליונה
-      const randomHeaderMsg = headerMotivations[Math.floor(Math.random() * headerMotivations.length)];
-      document.getElementById('header-motivation-text').innerText = randomHeaderMsg;
     }
 
     /* ---------- shape + boolean engine ---------- */
